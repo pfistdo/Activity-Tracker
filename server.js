@@ -1,4 +1,4 @@
-// Imports
+require('dotenv').config()
 const express = require("express");
 const { MongoClient, ObjectId } = require("mongodb"); // See https://www.mongodb.com/docs/drivers/node/current/quick-start/
 const cors = require("cors");
@@ -10,17 +10,14 @@ const app = express();
 app.use(cors()); // Allow all cross-origing requests. More information: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
 app.use(express.static("public")); // Host all static files in the folder /public
 app.use(bodyParser.json()); // Support json encoded bodies
-const port = process.env.PORT || "3001"; // Use the PORT variable if set (e.g., when deploying to Heroku)
+const port = process.env.PORT || "8081"; // Use the PORT variable if set (e.g., when deploying to Heroku)
 app.set("port", port);
 
 const server = http.createServer(app);
 
-// MongoDB connection URI
-// Username
-const db_user = "admin";
-
-// Password
-const db_pw = "1qay2wsx";
+// Define mongodb connection
+const db_user = process.env.DB_USER;
+const db_pw = process.env.DB_PW;
 
 // Create URI
 const uri =
