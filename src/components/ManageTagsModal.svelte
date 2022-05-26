@@ -5,7 +5,6 @@
 	let tags = [];
 
 	function getTags() {
-		console.log(categoryId);
 		axios.get("http://localhost:8081/api/tags?category=" + categoryId).then((response) => {
 			tags = response.data;
 		});
