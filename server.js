@@ -62,12 +62,11 @@ app.get('/api/categories', async (req, res) => {
 // Create a new category
 //--------------------------------------------------------------------------------------------------
 app.post('/api/categories', async (req, res) => {
-
     try {
         const collection = database.collection('categories');
 
         var category = {
-            category: req.body.category
+            name: req.body.name
         };
         const result = await collection.insertOne(category);
 
@@ -87,6 +86,9 @@ app.get('/api/ideas', async (req, res) => {
         if (req.query.category) {
             query.category = req.query.category
         }
+        if (req.query.tags) {
+            query.tags = req.query.tags
+        }
 
         // Get all objects that match the query
         const result = await collection.find(query).toArray();
@@ -100,17 +102,35 @@ app.get('/api/ideas', async (req, res) => {
 // Create a new category
 //--------------------------------------------------------------------------------------------------
 app.post('/api/ideas', async (req, res) => {
-
     try {
         const collection = database.collection('ideas');
 
         var idea = {
-            idea: req.body.idea,
+            name: req.body.name,
             category: req.body.category
         };
         const result = await collection.insertOne(idea);
 
         res.status(201).send({ _id: result.insertedId });
+    } catch (error) {
+        res.status(500).send({ error: error.message });
+    }
+})
+
+//--------------------------------------------------------------------------------------------------
+// Get all tags
+//--------------------------------------------------------------------------------------------------
+app.get('/api/tags', async (req, res) => {
+    try {
+        const collection = database.collection('tags');
+        const query = {}
+        if (req.query.category) {
+            query.category = req.query.category
+        }
+
+        // Get all objects that match the query
+        const result = await collection.find(query).toArray();
+        res.send(result);
     } catch (error) {
         res.status(500).send({ error: error.message });
     }

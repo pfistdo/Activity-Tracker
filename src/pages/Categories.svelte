@@ -1,5 +1,7 @@
 <script>
 	import axios from "axios";
+	import AddCategoryModal from "../components/AddCategoryModal.svelte";
+
 	let categories = [];
 
 	function getCategories() {
@@ -12,13 +14,14 @@
 
 <main>
 	<div class="container">
+		<div id="alertPlaceHolder" />
 		<div class="row">
 			{#each categories as category}
 				<div class="col-sm-3">
-					<a href="{"#/categories/" + category._id}">
+					<a href={"#/categories/" + category._id}>
 						<div class="card">
 							<div class="card-body">
-								<h5 class="card-title">{category.category}</h5>
+								<h5 class="card-title">{category.name}</h5>
 							</div>
 						</div>
 					</a>
@@ -26,13 +29,10 @@
 			{/each}
 			<!-- New category button -->
 			<div class="col-sm-3">
-				<a href="#/addCategory">
-					<div class="card">
-						<div class="card-body">
-							<h5 class="card-title">+</h5>
-						</div>
-					</div>
-				</a>
+				<AddCategoryModal />
+				<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
+					Add category
+				</button>
 			</div>
 		</div>
 	</div>

@@ -7,13 +7,7 @@
 <nav class="navbar bg-light">
 	<div class="container-fluid">
 		<a class="navbar-brand" href="/">
-			<img
-				src="/images/favicon.png"
-				alt=""
-				width="30"
-				height="24"
-				class="d-inline-block align-text-top"
-			/>
+			<img src="/images/favicon.png" alt="" width="30" height="24" class="d-inline-block align-text-top" />
 			Idea Tracker
 		</a>
 	</div>
