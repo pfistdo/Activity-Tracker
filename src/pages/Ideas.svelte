@@ -32,7 +32,7 @@
 		</button>
 		<div class="row">
 			{#each ideas as idea}
-				<div class="col-sm-3">
+				<div class="col-sm-3 mb-1">
 					<div class="card">
 						<div class="card-body">
 							{#each idea.tagsObject as tag}

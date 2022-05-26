@@ -17,7 +17,7 @@
 		<div id="alertPlaceHolder" />
 		<div class="row">
 			{#each categories as category}
-				<div class="col-sm-3">
+				<div class="col-sm-3 mb-1">
 					<a href={"#/categories/" + category._id}>
 						<div class="card">
 							<div class="card-body">

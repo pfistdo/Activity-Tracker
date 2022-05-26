@@ -84,10 +84,10 @@ app.get('/api/ideas', async (req, res) => {
         const collection = database.collection('ideas');
         const query = {}
         if (req.query.category) {
-            query.category = req.query.category
+            query.category = ObjectId(req.query.category)
         }
         if (req.query.tags) {
-            query.tags = req.query.tags
+            query.tags = ObjectId(req.query.tags)
         }
 
         // Get all objects that match the query
@@ -119,7 +119,6 @@ app.get('/api/ideas/*', async (req, res) => {
               }
             }
           ]
-        console.log(pipeline)
         const res2 = collection.aggregate(pipeline).toArray(function (err, data) {
             if (!err) {
                 res.send(data)
@@ -139,7 +138,7 @@ app.post('/api/ideas', async (req, res) => {
 
         var idea = {
             name: req.body.name,
-            category: req.body.category,
+            category: ObjectId(req.body.category),
             tags: req.body.tags
         };
         const result = await collection.insertOne(idea);
