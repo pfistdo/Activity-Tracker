@@ -1,6 +1,7 @@
 <script>
 	import axios from "axios";
 	export let params = {};
+	
 	let ideas = [];
     let id;
 
@@ -20,6 +21,7 @@
 <main>
 	<div class="container">
 		<div class="row">
+			<a class="btn btn-primary" href={"#/addIdea/" + id} role="button">Add Idea</a>
 			{#each ideas as idea}
 				<div class="col-sm-3">
 						<div class="card">

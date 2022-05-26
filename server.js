@@ -59,6 +59,25 @@ app.get('/api/categories', async (req, res) => {
 })
 
 //--------------------------------------------------------------------------------------------------
+// Create a new category
+//--------------------------------------------------------------------------------------------------
+app.post('/api/categories', async (req, res) => {
+
+    try {
+        const collection = database.collection('categories');
+
+        var category = {
+            category: req.body.category
+        };
+        const result = await collection.insertOne(category);
+
+        res.status(201).send({ _id: result.insertedId });
+    } catch (error) {
+        res.status(500).send({ error: error.message });
+    }
+})
+
+//--------------------------------------------------------------------------------------------------
 // Get all ideas
 //--------------------------------------------------------------------------------------------------
 app.get('/api/ideas', async (req, res) => {
@@ -72,6 +91,26 @@ app.get('/api/ideas', async (req, res) => {
         // Get all objects that match the query
         const result = await collection.find(query).toArray();
         res.send(result);
+    } catch (error) {
+        res.status(500).send({ error: error.message });
+    }
+})
+
+//--------------------------------------------------------------------------------------------------
+// Create a new category
+//--------------------------------------------------------------------------------------------------
+app.post('/api/ideas', async (req, res) => {
+
+    try {
+        const collection = database.collection('ideas');
+
+        var idea = {
+            idea: req.body.idea,
+            category: req.body.category
+        };
+        const result = await collection.insertOne(idea);
+
+        res.status(201).send({ _id: result.insertedId });
     } catch (error) {
         res.status(500).send({ error: error.message });
     }

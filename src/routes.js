@@ -1,6 +1,9 @@
 // Pages
 import Categories from "./pages/Categories.svelte"
+import AddCategory from "./pages/AddCategory.svelte"
+
 import Ideas from "./pages/Ideas.svelte"
+import AddIdea from "./pages/AddIdea.svelte"
 
 // import Albums from "./pages/albums/Albums.svelte"
 // import AlbumDetails from "./pages/albums/AlbumDetails.svelte"
@@ -14,9 +17,12 @@ export default {
     '/': Categories,
     '/home': Categories,
     '/categories': Categories,
+    '/addCategory': AddCategory,
 
     // Ideas
     '/categories/:id': Ideas,
+    '/addIdea/:id': AddIdea,
+    
     
     // // Artists
     // '/artists': Artists,

@@ -26,7 +26,7 @@
 			{/each}
 			<!-- New category button -->
 			<div class="col-sm-3">
-				<a href="#">
+				<a href="#/addCategory">
 					<div class="card">
 						<div class="card-body">
 							<h5 class="card-title">+</h5>
