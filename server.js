@@ -28,24 +28,52 @@ const uri =
     "@cluster0.epapy.mongodb.net/?retryWrites=true&w=majority";
 
 // Create the client
+let database;
 const client = new MongoClient(uri);
+client.connect((error, db) => {
+    if (error || !db) {
+        console.log("Could not connect to MongoDB:")
+        console.log(error.message);
+    }
+    else {
+        database = db.db('Idea-Tracker');
+        console.log("Successfully connected to MongoDB.");
+    }
+})
 
 //////////////////////////////////////
 //// ENDPOINTS ///////////////////////
 //////////////////////////////////////
 
-// Endpoints
-app.get('/api/colors', async (req, res) => {
+//--------------------------------------------------------------------------------------------------
+// Get all categories
+//--------------------------------------------------------------------------------------------------
+app.get('/api/categories', async (req, res) => {
     try {
-        await client.connect();
-        const database = client.db('Activity-Tracker');
-        const messages = database.collection('colors');
-        const result = await messages.find().toArray();
+        const collection = database.collection('categories');
+        const result = await collection.find().toArray();
         res.send(result);
     } catch (error) {
         res.status(500).send({ error: error.message });
-    } finally {
-        await client.close();
+    }
+})
+
+//--------------------------------------------------------------------------------------------------
+// Get all ideas
+//--------------------------------------------------------------------------------------------------
+app.get('/api/ideas', async (req, res) => {
+    try {
+        const collection = database.collection('ideas');
+        const query = {}
+        if (req.query.category) {
+            query.category = req.query.category
+        }
+
+        // Get all objects that match the query
+        const result = await collection.find(query).toArray();
+        res.send(result);
+    } catch (error) {
+        res.status(500).send({ error: error.message });
     }
 })
 

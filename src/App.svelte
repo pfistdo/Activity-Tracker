@@ -1,25 +1,28 @@
 <script>
-	import { onMount } from "svelte";
-	const endpoint = "http://localhost:8081/api/colors";
-	let colors = [];
-
-	onMount(async function () {
-		const response = await fetch(endpoint);
-		const data = await response.json();
-		console.log(data);
-		colors = data;
-	});
+	import Router from "svelte-spa-router";
+	import routes from "./routes";
 </script>
 
-<main>
-	<div class="container">
-		<div class="row justify-content">
-			<h1>Schöne Farben</h1>
-			{#each colors as color}
-			<div>
-			  <p>{color.color}</p>
-			</div>
-		  {/each}
-		</div>
+<!-- This part is always displayed -->
+<nav class="navbar bg-light">
+	<div class="container-fluid">
+		<a class="navbar-brand" href="/">
+			<img
+				src="/images/favicon.png"
+				alt=""
+				width="30"
+				height="24"
+				class="d-inline-block align-text-top"
+			/>
+			Idea Tracker
+		</a>
 	</div>
-</main>
+</nav>
+
+<div class="container mt-4">
+	<!-- Here we load the page depending on the current URL -->
+	<Router {routes} />
+</div>
+
+<style>
+</style>
