@@ -1,6 +1,6 @@
 <script>
 	import { onMount } from "svelte";
-	const endpoint = "http://localhost:3001/api/colors";
+	const endpoint = "http://localhost:8081/api/colors";
 	let colors = [];
 
 	onMount(async function () {
