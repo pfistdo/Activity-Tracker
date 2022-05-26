@@ -27,13 +27,14 @@
 					</a>
 				</div>
 			{/each}
+		</div>
+		<div class="row">
 			<!-- New category button -->
-			<div class="col-sm-3">
-				<AddCategoryModal />
-				<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
-					Add category
-				</button>
-			</div>
+			<AddCategoryModal />
+			<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
+				Add category
+			</button>
+
 		</div>
 	</div>
 </main>

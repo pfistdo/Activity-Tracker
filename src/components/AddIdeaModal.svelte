@@ -6,6 +6,7 @@
     let idea = {
         name: "",
         category: categoryId,
+        tags: []
     };
 
     function addIdea() {

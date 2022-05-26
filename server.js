@@ -99,7 +99,39 @@ app.get('/api/ideas', async (req, res) => {
 })
 
 //--------------------------------------------------------------------------------------------------
-// Create a new category
+// Get ideas by category and aggregate tags
+//--------------------------------------------------------------------------------------------------
+app.get('/api/ideas/*', async (req, res) => {
+    try {
+        const collection = database.collection('ideas');
+
+        const pipeline = [
+            {
+              '$lookup': {
+                'from': 'tags', 
+                'localField': 'tags', 
+                'foreignField': '_id', 
+                'as': 'tagsObject'
+              }
+            }, {
+              '$match': {
+                'category': ObjectId(req.query.category)
+              }
+            }
+          ]
+        console.log(pipeline)
+        const res2 = collection.aggregate(pipeline).toArray(function (err, data) {
+            if (!err) {
+                res.send(data)
+            }
+        })
+    } catch (error) {
+        res.status(500).send({ error: error.message });
+    }
+})
+
+//--------------------------------------------------------------------------------------------------
+// Create a new idea
 //--------------------------------------------------------------------------------------------------
 app.post('/api/ideas', async (req, res) => {
     try {
@@ -107,7 +139,8 @@ app.post('/api/ideas', async (req, res) => {
 
         var idea = {
             name: req.body.name,
-            category: req.body.category
+            category: req.body.category,
+            tags: req.body.tags
         };
         const result = await collection.insertOne(idea);
 

@@ -22,7 +22,7 @@
 			<div class="modal-body">
 				<div class="mb-3">
 					{#each tags as tag}
-						<div class="col-sm-3">
+						<div class="col-sm-12 mb-1">
 							<div class="card">
 								<div class="card-body">
 									<h5 class="card-title">{tag.name}</h5>
