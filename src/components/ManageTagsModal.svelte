@@ -1,5 +1,6 @@
 <script>
 	import axios from "axios";
+	import AddTagModal from "../components/AddTagModal.svelte";
 
 	export let categoryId;
 	let tags = [];
@@ -14,12 +15,15 @@
 
 <div class="modal fade" id="manageTagsModal" tabindex="-1" aria-labelledby="manageTagsModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
+		<div id="alertPlaceHolderAddTag" />
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title" id="manageTagsModalLabel">Manage tags</h5>
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" />
 			</div>
 			<div class="modal-body">
+				<AddTagModal {categoryId}/>
+				<hr>
 				<div class="mb-3">
 					{#each tags as tag}
 						<div class="col-sm-12 mb-1">
@@ -31,6 +35,7 @@
 						</div>
 					{/each}
 				</div>
+
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

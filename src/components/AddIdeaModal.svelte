@@ -8,6 +8,7 @@
         category: categoryId,
         tags: []
     };
+    let tags = [] //available tags for current category
 
     function addIdea() {
         axios
@@ -36,6 +37,13 @@
                 alertPlaceholder.append(wrapper);
             });
     }
+
+    function getTags() {
+        axios.get("http://localhost:8081/api/tags?category=" + categoryId).then((response) => {
+            tags = response.data;
+        });
+    }
+    getTags();
 </script>
 
 <div class="modal fade" id="addIdeaModal" tabindex="-1" aria-labelledby="addIdeaLabel" aria-hidden="true">
@@ -46,9 +54,22 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" />
             </div>
             <div class="modal-body">
-                <div class="mb-3">
-                    <input class="form-control" type="text" placeholder="Idea name" bind:value={idea.name} />
-                </div>
+                <form>
+                    <div class="mb-3">
+                        <label class="form-label" for="ideaName">Idea</label>
+                        <input class="form-control" type="text" placeholder="Idea name" bind:value={idea.name} id="ideaName"/>
+                    </div>
+                    <div class="mb-3">
+                        {#each tags as tag}
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox"  bind:group={idea.tags} value={tag._id} id={"tag"+tag._id}/>
+                                <label class="form-check-label" for={"tag"+tag._id}>
+                                    {tag.name}
+                                </label>
+                            </div>
+                        {/each}
+                    </div>
+                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

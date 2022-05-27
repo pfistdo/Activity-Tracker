@@ -21,27 +21,29 @@
 
 <main>
 	<div class="container">
-		<div id="alertPlaceHolder" />
-		<AddIdeaModal {categoryId} />
-		<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addIdeaModal">
-			Add idea
-		</button>
-		<ManageTagsModal {categoryId} />
-		<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#manageTagsModal">
-			Manage tags
-		</button>
+		<div class="row">
+			<div id="alertPlaceHolder" />
+			<AddIdeaModal {categoryId} />
+			<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addIdeaModal">
+				Add idea
+			</button>
+			<ManageTagsModal {categoryId}/>
+			<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#manageTagsModal">
+				Manage tags
+			</button>
+		</div>
 		<div class="row">
 			{#each ideas as idea}
 				<div class="col-sm-3 mb-1">
 					<div class="card">
 						<div class="card-body">
 							{#each idea.tagsObject as tag}
-									<span class="badge rounded-pill text-bg-secondary">{tag.name}</span>
-								{/each}
+								<span class="badge rounded-pill text-bg-secondary">{tag.name}</span>
+							{/each}
 							<h5 class="card-title">
 								{idea.name}
 							</h5>
-							<p class="card-text"></p>
+							<p class="card-text" />
 						</div>
 					</div>
 				</div>
@@ -52,6 +54,6 @@
 
 <style>
 	.rounded-pill {
-		margin-right: 5px; 
+		margin-right: 5px;
 	}
 </style>

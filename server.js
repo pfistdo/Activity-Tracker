@@ -139,7 +139,7 @@ app.post('/api/ideas', async (req, res) => {
         var idea = {
             name: req.body.name,
             category: ObjectId(req.body.category),
-            tags: req.body.tags
+            tags: req.body.tags.map(ObjectId)
         };
         const result = await collection.insertOne(idea);
 
@@ -157,12 +157,31 @@ app.get('/api/tags', async (req, res) => {
         const collection = database.collection('tags');
         const query = {}
         if (req.query.category) {
-            query.category = req.query.category
+            query.category = ObjectId(req.query.category)
         }
 
         // Get all objects that match the query
         const result = await collection.find(query).toArray();
         res.send(result);
+    } catch (error) {
+        res.status(500).send({ error: error.message });
+    }
+})
+
+//--------------------------------------------------------------------------------------------------
+// Create a new tag
+//--------------------------------------------------------------------------------------------------
+app.post('/api/tags', async (req, res) => {
+    try {
+        const collection = database.collection('tags');
+
+        var tag = {
+            name: req.body.name,
+            category: ObjectId(req.body.category)
+        };
+        const result = await collection.insertOne(tag);
+
+        res.status(201).send({ _id: result.insertedId });
     } catch (error) {
         res.status(500).send({ error: error.message });
     }
