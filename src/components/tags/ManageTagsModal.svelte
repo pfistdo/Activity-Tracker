@@ -1,6 +1,6 @@
 <script>
 	import axios from "axios";
-	import AddTagModal from "../components/AddTagModal.svelte";
+	import AddTagModal from "./tags/AddTagModal.svelte";
 
 	export let categoryId;
 	let tags = [];
@@ -39,12 +39,6 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-				<!-- <button
-                    on:click={addIdea}
-                    type="button"
-                    class="btn btn-primary"
-                    data-bs-dismiss="modal">Submit</button
-                > -->
 			</div>
 		</div>
 	</div>

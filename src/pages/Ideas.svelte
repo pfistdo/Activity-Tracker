@@ -1,6 +1,6 @@
 <script>
 	import axios from "axios";
-	import AddIdeaModal from "../components/AddIdeaModal.svelte";
+	import AddIdeaModal from "../components/ideas/AddIdeaModal.svelte";
 	import ManageTagsModal from "../components/ManageTagsModal.svelte";
 
 	export let params = {};

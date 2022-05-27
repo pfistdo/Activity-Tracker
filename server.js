@@ -77,6 +77,35 @@ app.post('/api/categories', async (req, res) => {
 })
 
 //--------------------------------------------------------------------------------------------------
+// Update a category
+//--------------------------------------------------------------------------------------------------
+app.put('/api/categories/:id', async (req, res) => {
+
+    let id = ObjectId(req.params.id);
+    let category = req.body;
+    delete category._id; // delete the _id from the object, because the _id cannot be updated
+
+    try {
+        const collection = database.collection('categories');
+        const query = { _id: id }; // filter by id
+        const result = await collection.updateOne(query, { $set: category });
+
+        if (result.matchedCount === 0) {
+            let responseBody = {
+                status: "No object with id " + id
+            }
+            res.status(404).send(responseBody);
+        }
+        else {
+            res.send({ status: "Object with id " + id + " has been updated." });
+        }
+    } catch (error) {
+        res.status(500).send({ error: error.message });
+    }
+})
+
+
+//--------------------------------------------------------------------------------------------------
 // Get all ideas
 //--------------------------------------------------------------------------------------------------
 app.get('/api/ideas', async (req, res) => {
