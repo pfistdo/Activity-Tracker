@@ -1,8 +1,11 @@
 <script>
 	import axios from "axios";
-	import AddTagModal from "./tags/AddTagModal.svelte";
+	import AddTagModal from "../tags/AddTagModal.svelte";
 
 	export let categoryId;
+	export let getIdeas = () => {}
+
+	// let callParentFunction = getIdeas();
 	let tags = [];
 
 	function getTags() {
@@ -10,9 +13,71 @@
 			tags = response.data;
 		});
 	}
+
+	function editTag(tag) {
+		axios
+            .put("http://localhost:8081/api/tags/"+tag._id, tag)
+            .then((response) => {
+                const alertPlaceholder = document.getElementById("alertPlaceHolderAddTag");
+                const wrapper = document.createElement("div");
+                wrapper.innerHTML = [
+                    '<div class="alert alert-success alert-dismissible fade show" role="alert">',
+                    "   <div>Tag edited successfully</div>",
+                    '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+                    "</div>",
+                ].join("");
+                alertPlaceholder.append(wrapper);
+				getIdeas()
+            })
+            .catch((error) => {
+                console.log(error);
+                const alertPlaceholder = document.getElementById("alertPlaceHolderAddTag");
+                const wrapper = document.createElement("div");
+                wrapper.innerHTML = [
+                    '<div class="alert alert-danger alert-dismissible fade show" role="alert">',
+                    "   <div>Failed to edit tag!</div>",
+                    '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+                    "</div>",
+                ].join("");
+                alertPlaceholder.append(wrapper);
+            });
+	}
+
+	function deleteTag(tag) {
+		axios
+            .delete("http://localhost:8081/api/tags/"+tag._id, tag)
+            .then((response) => {
+                const alertPlaceholder = document.getElementById("alertPlaceHolderAddTag");
+                const wrapper = document.createElement("div");
+                wrapper.innerHTML = [
+                    '<div class="alert alert-success alert-dismissible fade show" role="alert">',
+                    "   <div>Tag deleted successfully</div>",
+                    '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+                    "</div>",
+                ].join("");
+                alertPlaceholder.append(wrapper);
+				getIdeas()
+				getTags()
+            })
+            .catch((error) => {
+                console.log(error);
+                const alertPlaceholder = document.getElementById("alertPlaceHolderAddTag");
+                const wrapper = document.createElement("div");
+                wrapper.innerHTML = [
+                    '<div class="alert alert-danger alert-dismissible fade show" role="alert">',
+                    "   <div>Failed to delete tag!</div>",
+                    '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+                    "</div>",
+                ].join("");
+                alertPlaceholder.append(wrapper);
+            });
+	}
 	getTags();
 </script>
 
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#manageTagsModal">
+	Manage tags
+</button>
 <div class="modal fade" id="manageTagsModal" tabindex="-1" aria-labelledby="manageTagsModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div id="alertPlaceHolderAddTag" />
@@ -22,14 +87,18 @@
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" />
 			</div>
 			<div class="modal-body">
-				<AddTagModal {categoryId}/>
+				<AddTagModal {categoryId} getTags={getTags}/>
 				<hr>
 				<div class="mb-3">
 					{#each tags as tag}
 						<div class="col-sm-12 mb-1">
 							<div class="card">
 								<div class="card-body">
-									<h5 class="card-title">{tag.name}</h5>
+									<div class="input-group">
+										<input type="text" class="form-control" bind:value={tag.name}>
+										<button on:click={editTag(tag)} class="btn btn-success" type="button">Save</button>
+										<button on:click={deleteTag(tag)} class="btn btn-danger" type="button">Delete</button>
+									  </div>
 								</div>
 							</div>
 						</div>

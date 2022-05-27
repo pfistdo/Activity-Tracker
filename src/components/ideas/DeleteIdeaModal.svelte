@@ -1,26 +1,25 @@
 <script>
     import axios from "axios";
 
-    export let getCategories = () => {}
-
-    let category = {
-        name: "",
+    export let deleteIdeaPtr = {
+        name: ""
     };
+    export let getIdeas = () => {}
 
-    function addCategory() {
+    function deleteIdea() {
         axios
-            .post("http://localhost:8081/api/categories", category)
+            .delete("http://localhost:8081/api/ideas/"+deleteIdeaPtr._id, deleteIdeaPtr)
             .then((response) => {
                 const alertPlaceholder = document.getElementById("alertPlaceHolder");
                 const wrapper = document.createElement("div");
                 wrapper.innerHTML = [
                     '<div class="alert alert-success alert-dismissible fade show" role="alert">',
-                    "   <div>Category added successfully</div>",
+                    "   <div>Idea deleted successfully</div>",
                     '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
                     "</div>",
                 ].join("");
                 alertPlaceholder.append(wrapper);
-                getCategories()
+                getIdeas()
             })
             .catch((error) => {
                 console.log(error);
@@ -28,7 +27,7 @@
                 const wrapper = document.createElement("div");
                 wrapper.innerHTML = [
                     '<div class="alert alert-danger alert-dismissible fade show" role="alert">',
-                    "   <div>Failed to add category!</div>",
+                    "   <div>Failed to delete idea!</div>",
                     '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
                     "</div>",
                 ].join("");
@@ -37,23 +36,26 @@
     }
 </script>
 
-<div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryLabel" aria-hidden="true">
+<button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target={"#delete" + deleteIdeaPtr._id}>
+    Delete
+</button>
+<div class="modal fade" id={"delete" + deleteIdeaPtr._id} tabindex="-1" aria-labelledby="deleteIdeaLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="addCategoryLabel">Create a new category</h5>
+                <h5 class="modal-title" id="deleteIdeaLabel">Confirm delete</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" />
             </div>
             <div class="modal-body">
                 <div class="mb-3">
-                    <input class="form-control" type="text" placeholder="Category name" bind:value={category.name} />
+                    <p>Are you sure you want to delete idea <b>{deleteIdeaPtr.name}?</b></p>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button on:click={addCategory} type="button" class="btn btn-primary" data-bs-dismiss="modal"
-                    >Submit</button
-                >
+                <button on:click={deleteIdea} type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                    Delete
+                </button>
             </div>
         </div>
     </div>

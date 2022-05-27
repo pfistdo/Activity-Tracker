@@ -2,6 +2,7 @@
 	import axios from "axios";
 	import AddCategoryModal from "../components/categories/AddCategoryModal.svelte";
 	import EditCategoryModal from "../components/categories/EditCategoryModal.svelte";
+	import DeleteCategoryModal from "../components/categories/DeleteCategoryModal.svelte";
 
 	let categories = [];
 
@@ -25,15 +26,15 @@
 								<h5 class="card-title">{category.name}</h5>
 							</div>
 						</a>
-						<EditCategoryModal editCat={category}/>
-						<button type="button" class="btn btn-danger btn-sm">Delete</button>
+						<EditCategoryModal editCat={category} getCategories={getCategories}/>
+						<DeleteCategoryModal deleteCat={category} getCategories={getCategories}/>
 					</div>
 				</div>
 			{/each}
 		</div>
 		<div class="row">
 			<!-- New category button -->
-			<AddCategoryModal />
+			<AddCategoryModal getCategories={getCategories}/>
 			<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
 				Add category
 			</button>

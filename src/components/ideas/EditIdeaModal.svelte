@@ -1,25 +1,23 @@
 <script>
     import axios from "axios";
 
-    export let categoryId;
-    export let getIdeas = () => {}
-
-    let idea = {
+    export let editIdeaPtr = {
         name: "",
-        category: categoryId,
+        category: "",
         tags: []
     };
+    export let getIdeas = () => {}
     let tags = []; //available tags for current category
 
-    function addIdea() {
+    function editIdea() {
         axios
-            .post("http://localhost:8081/api/ideas", idea)
+            .put("http://localhost:8081/api/ideas/"+editIdeaPtr._id, editIdeaPtr)
             .then((response) => {
                 const alertPlaceholder = document.getElementById("alertPlaceHolder");
                 const wrapper = document.createElement("div");
                 wrapper.innerHTML = [
                     '<div class="alert alert-success alert-dismissible fade show" role="alert">',
-                    "   <div>Idea added successfully</div>",
+                    "   <div>Idea edited successfully</div>",
                     '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
                     "</div>",
                 ].join("");
@@ -32,35 +30,30 @@
                 const wrapper = document.createElement("div");
                 wrapper.innerHTML = [
                     '<div class="alert alert-danger alert-dismissible fade show" role="alert">',
-                    "   <div>Failed to add idea!</div>",
+                    "   <div>Failed to edit idea!</div>",
                     '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
                     "</div>",
                 ].join("");
                 alertPlaceholder.append(wrapper);
             });
-        idea = {
-            name: "",
-            category: categoryId,
-            tags: []
-        };
     }
 
     function getTags() {
-        axios.get("http://localhost:8081/api/tags?category=" + categoryId).then((response) => {
+        axios.get("http://localhost:8081/api/tags?category=" + editIdeaPtr.category).then((response) => {
             tags = response.data;
         });
     }
     getTags();
 </script>
 
-<button on:click={getTags} type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addIdeaModal">
-    Add idea
+<button on:click={getTags} type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target={"#edit" + editIdeaPtr._id}>
+    Edit
 </button>
-<div class="modal fade" id="addIdeaModal" tabindex="-1" aria-labelledby="addIdeaLabel" aria-hidden="true">
+<div class="modal fade" id={"edit" + editIdeaPtr._id} tabindex="-1" aria-labelledby="editIdeaLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="addIdeaLabel">Create a new idea</h5>
+                <h5 class="modal-title" id="editIdeaLabel">Edit idea</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" />
             </div>
             <div class="modal-body">
@@ -71,7 +64,7 @@
                             class="form-control"
                             type="text"
                             placeholder="Idea name"
-                            bind:value={idea.name}
+                            bind:value={editIdeaPtr.name}
                             id="ideaName"
                         />
                     </div>
@@ -81,7 +74,7 @@
                                 <input
                                     class="form-check-input"
                                     type="checkbox"
-                                    bind:group={idea.tags}
+                                    bind:group={editIdeaPtr.tags}
                                     value={tag._id}
                                     id={"tag" + tag._id}
                                 />
@@ -95,7 +88,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button on:click={addIdea} type="button" class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
+                <button on:click={editIdea} type="button" class="btn btn-primary" data-bs-dismiss="modal">Edit</button>
             </div>
         </div>
     </div>

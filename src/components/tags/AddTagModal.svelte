@@ -2,6 +2,7 @@
     import axios from "axios";
 
     export let categoryId;
+    export let getTags = () => {}
 
     let tag = {
         name: "",
@@ -21,6 +22,7 @@
                     "</div>",
                 ].join("");
                 alertPlaceholder.append(wrapper);
+				getTags()
             })
             .catch((error) => {
                 console.log(error);

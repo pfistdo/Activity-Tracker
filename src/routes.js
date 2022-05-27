@@ -1,11 +1,10 @@
 // Pages
 import Categories from "./pages/Categories.svelte"
-import AddCategory from "./components/AddCategoryModal.svelte"
+// import AddCategory from "./components/AddCategoryModal.svelte"
 
 import Ideas from "./pages/Ideas.svelte"
-import AddIdea from "./components/AddIdeaModal.svelte"
 
-import ManageTags from "./components/ManageTagsModal.svelte"
+// import ManageTags from "./components/ManageTagsModal.svelte"
 
 // import Albums from "./pages/albums/Albums.svelte"
 // import AlbumDetails from "./pages/albums/AlbumDetails.svelte"

@@ -1,12 +1,14 @@
 <script>
 	import axios from "axios";
 	import AddIdeaModal from "../components/ideas/AddIdeaModal.svelte";
-	import ManageTagsModal from "../components/ManageTagsModal.svelte";
+	import EditIdeaModal from "../components/ideas/EditIdeaModal.svelte";
+	import DeleteIdeaModal from "../components/ideas/DeleteIdeaModal.svelte";
+	import ManageTagsModal from "../components/tags/ManageTagsModal.svelte";
 
 	export let params = {};
 
 	let ideas = [];
-	export var categoryId;
+	export let categoryId;
 	categoryId = params.id;
 
 	function getIdeas() {
@@ -14,8 +16,6 @@
 			ideas = response.data;
 		});
 	}
-
-	function getTags() {}
 	getIdeas();
 </script>
 
@@ -23,14 +23,8 @@
 	<div class="container">
 		<div class="row">
 			<div id="alertPlaceHolder" />
-			<AddIdeaModal {categoryId} />
-			<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addIdeaModal">
-				Add idea
-			</button>
-			<ManageTagsModal {categoryId}/>
-			<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#manageTagsModal">
-				Manage tags
-			</button>
+			<AddIdeaModal {categoryId} getIdeas={getIdeas}/>
+			<ManageTagsModal {categoryId} getIdeas={getIdeas}/>
 		</div>
 		<div class="row">
 			{#each ideas as idea}
@@ -45,6 +39,8 @@
 							</h5>
 							<p class="card-text" />
 						</div>
+						<EditIdeaModal editIdeaPtr={idea} getIdeas={getIdeas}/>
+						<DeleteIdeaModal deleteIdeaPtr={idea} getIdeas={getIdeas}/>
 					</div>
 				</div>
 			{/each}

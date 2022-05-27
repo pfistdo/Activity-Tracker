@@ -4,6 +4,7 @@
     export let editCat = {
         name: ""
     };
+    export let getCategories = () => {}
 
     function editCategory() {
         axios
@@ -13,11 +14,12 @@
                 const wrapper = document.createElement("div");
                 wrapper.innerHTML = [
                     '<div class="alert alert-success alert-dismissible fade show" role="alert">',
-                    "   <div>Category added successfully</div>",
+                    "   <div>Category edited successfully</div>",
                     '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
                     "</div>",
                 ].join("");
                 alertPlaceholder.append(wrapper);
+                getCategories()
             })
             .catch((error) => {
                 console.log(error);
@@ -25,7 +27,7 @@
                 const wrapper = document.createElement("div");
                 wrapper.innerHTML = [
                     '<div class="alert alert-danger alert-dismissible fade show" role="alert">',
-                    "   <div>Failed to add category!</div>",
+                    "   <div>Failed to edit category!</div>",
                     '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
                     "</div>",
                 ].join("");
@@ -52,7 +54,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button on:click={editCategory} type="button" class="btn btn-primary" data-bs-dismiss="modal">
-                    Submit
+                    Edit
                 </button>
             </div>
         </div>

@@ -104,6 +104,35 @@ app.put('/api/categories/:id', async (req, res) => {
     }
 })
 
+//--------------------------------------------------------------------------------------------------
+// Delete a category
+//--------------------------------------------------------------------------------------------------
+app.delete('/api/categories/:id', async (req, res) => {
+
+    // read the path parameter :id
+    let id = req.params.id;
+
+    try {
+        const collection = database.collection('categories');
+        const query = { _id: ObjectId(id) }; // filter by id
+        const result = await collection.deleteOne(query);
+
+        if (result.deletedCount === 0) {
+            let responseBody = {
+                status: "No object with id " + id
+            }
+            res.status(404).send(responseBody);
+        }
+        else {
+            let responseBody = {
+                status: "Object with id " + id + " has been successfully deleted."
+            }
+            res.send(responseBody);
+        }
+    } catch (error) {
+        res.status(500).send({ error: error.message });
+    }
+})
 
 //--------------------------------------------------------------------------------------------------
 // Get all ideas
@@ -179,6 +208,66 @@ app.post('/api/ideas', async (req, res) => {
 })
 
 //--------------------------------------------------------------------------------------------------
+// Update an idea
+//--------------------------------------------------------------------------------------------------
+app.put('/api/ideas/:id', async (req, res) => {
+
+    let id = ObjectId(req.params.id);
+    let idea = req.body;
+    idea.category = ObjectId(idea.category)
+    idea.tags =  req.body.tags.map(ObjectId)
+    delete idea._id; // delete the _id from the object, because the _id cannot be updated
+
+    try {
+        const collection = database.collection('ideas');
+        const query = { _id: id }; // filter by id
+        const result = await collection.updateOne(query, { $set: idea });
+
+        if (result.matchedCount === 0) {
+            let responseBody = {
+                status: "No object with id " + id
+            }
+            res.status(404).send(responseBody);
+        }
+        else {
+            res.send({ status: "Object with id " + id + " has been updated." });
+        }
+    } catch (error) {
+        res.status(500).send({ error: error.message });
+    }
+})
+
+//--------------------------------------------------------------------------------------------------
+// Delete an idea
+//--------------------------------------------------------------------------------------------------
+app.delete('/api/ideas/:id', async (req, res) => {
+
+    // read the path parameter :id
+    let id = req.params.id;
+
+    try {
+        const collection = database.collection('ideas');
+        const query = { _id: ObjectId(id) }; // filter by id
+        const result = await collection.deleteOne(query);
+
+        if (result.deletedCount === 0) {
+            let responseBody = {
+                status: "No object with id " + id
+            }
+            res.status(404).send(responseBody);
+        }
+        else {
+            let responseBody = {
+                status: "Object with id " + id + " has been successfully deleted."
+            }
+            res.send(responseBody);
+        }
+    } catch (error) {
+        res.status(500).send({ error: error.message });
+    }
+})
+
+//--------------------------------------------------------------------------------------------------
 // Get all tags
 //--------------------------------------------------------------------------------------------------
 app.get('/api/tags', async (req, res) => {
@@ -216,5 +305,63 @@ app.post('/api/tags', async (req, res) => {
     }
 })
 
+//--------------------------------------------------------------------------------------------------
+// Update a tag
+//--------------------------------------------------------------------------------------------------
+app.put('/api/tags/:id', async (req, res) => {
+
+    let id = ObjectId(req.params.id);
+    let tag = req.body;
+    delete tag._id;
+    delete tag.category;
+
+    try {
+        const collection = database.collection('tags');
+        const query = { _id: id }; // filter by id
+        const result = await collection.updateOne(query, { $set: tag });
+
+        if (result.matchedCount === 0) {
+            let responseBody = {
+                status: "No object with id " + id
+            }
+            res.status(404).send(responseBody);
+        }
+        else {
+            res.send({ status: "Object with id " + id + " has been updated." });
+        }
+    } catch (error) {
+        res.status(500).send({ error: error.message });
+    }
+})
+
+//--------------------------------------------------------------------------------------------------
+// Delete a tag
+//--------------------------------------------------------------------------------------------------
+app.delete('/api/tags/:id', async (req, res) => {
+
+    // read the path parameter :id
+    let id = req.params.id;
+
+    try {
+        const collection = database.collection('tags');
+        const query = { _id: ObjectId(id) }; // filter by id
+        const result = await collection.deleteOne(query);
+
+        if (result.deletedCount === 0) {
+            let responseBody = {
+                status: "No object with id " + id
+            }
+            res.status(404).send(responseBody);
+        }
+        else {
+            let responseBody = {
+                status: "Object with id " + id + " has been successfully deleted."
+            }
+            res.send(responseBody);
+        }
+    } catch (error) {
+        res.status(500).send({ error: error.message });
+    }
+})
 // Start the server
 server.listen(port, () => console.log("app listening on port " + port));
