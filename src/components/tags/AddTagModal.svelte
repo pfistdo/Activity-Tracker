@@ -22,6 +22,9 @@
                     "</div>",
                 ].join("");
                 alertPlaceholder.append(wrapper);
+                setTimeout(function() {
+                    bootstrap.Alert.getOrCreateInstance(document.querySelector(".alert")).close();
+                }, 3000)
 				getTags()
             })
             .catch((error) => {
@@ -35,6 +38,9 @@
                     "</div>",
                 ].join("");
                 alertPlaceholder.append(wrapper);
+                setTimeout(function() {
+                    bootstrap.Alert.getOrCreateInstance(document.querySelector(".alert")).close();
+                }, 3000)
             });
             tag.name = ""
     }

@@ -19,6 +19,9 @@
                     "</div>",
                 ].join("");
                 alertPlaceholder.append(wrapper);
+                setTimeout(function() {
+                    bootstrap.Alert.getOrCreateInstance(document.querySelector(".alert")).close();
+                }, 3000)
                 getCategories()
             })
             .catch((error) => {
@@ -31,6 +34,9 @@
                     '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
                     "</div>",
                 ].join("");
+                setTimeout(function() {
+                    bootstrap.Alert.getOrCreateInstance(document.querySelector(".alert")).close();
+                }, 3000)
                 alertPlaceholder.append(wrapper);
             });
     }

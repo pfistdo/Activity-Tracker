@@ -19,6 +19,9 @@
                     "</div>",
                 ].join("");
                 alertPlaceholder.append(wrapper);
+                setTimeout(function() {
+                    bootstrap.Alert.getOrCreateInstance(document.querySelector(".alert")).close();
+                }, 3000)
                 getCategories()
             })
             .catch((error) => {
@@ -32,6 +35,9 @@
                     "</div>",
                 ].join("");
                 alertPlaceholder.append(wrapper);
+                setTimeout(function() {
+                    bootstrap.Alert.getOrCreateInstance(document.querySelector(".alert")).close();
+                }, 3000)
             });
     }
 </script>
