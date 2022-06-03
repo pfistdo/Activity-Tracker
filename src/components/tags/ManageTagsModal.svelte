@@ -88,8 +88,10 @@
 </script>
 
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#manageTagsModal">
+	<i class="bi bi-pencil-square"></i>
 	Manage tags
 </button>
+
 <div class="modal fade" id="manageTagsModal" tabindex="-1" aria-labelledby="manageTagsModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div id="alertPlaceHolderAddTag" />

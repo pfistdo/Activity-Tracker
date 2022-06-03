@@ -60,8 +60,10 @@
 </script>
 
 <button on:click={getTags} type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addIdeaModal">
+    <i class="bi bi-plus-square"></i>
     Add idea
 </button>
+
 <div class="modal fade" id="addIdeaModal" tabindex="-1" aria-labelledby="addIdeaLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">

@@ -4,6 +4,8 @@ import Categories from "./pages/Categories.svelte"
 
 import Ideas from "./pages/Ideas.svelte"
 
+import Documentation from "./pages/Documentation.svelte"
+
 // import ManageTags from "./components/ManageTagsModal.svelte"
 
 // import Albums from "./pages/albums/Albums.svelte"
@@ -20,5 +22,8 @@ export default {
     '/categories': Categories,
 
     // Ideas
-    '/categories/:id': Ideas
+    '/categories/:id': Ideas,
+
+    // Documentation
+    '/documentation': Documentation
 }
