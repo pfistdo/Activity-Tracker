@@ -10,7 +10,7 @@ const app = express();
 app.use(cors()); // Allow all cross-origing requests. More information: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
 app.use(express.static("public")); // Host all static files in the folder /public
 app.use(bodyParser.json()); // Support json encoded bodies
-const port = process.env.PORT || "8081"; // Use the PORT variable if set (e.g., when deploying to Heroku)
+const port = process.env.PORT || "5000"; // Use the PORT variable if set (e.g., when deploying to Heroku)
 app.set("port", port);
 
 const server = http.createServer(app);

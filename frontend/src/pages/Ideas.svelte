@@ -15,7 +15,7 @@
   let searchString = ""; //for search bar
 
   function getIdeas() {
-    axios.get("http://localhost:8081/api/ideas/*?category=" + categoryId).then((response) => {
+    axios.get("http://0.0.0.0/api/ideas/*?category=" + categoryId).then((response) => {
       originalIdeas = response.data;
       ideas = originalIdeas;
     });

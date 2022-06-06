@@ -13,7 +13,7 @@
 
     function addIdea() {
         axios
-            .post("http://localhost:8081/api/ideas", idea)
+            .post("http://0.0.0.0/api/ideas", idea)
             .then((response) => {
                 const alertPlaceholder = document.getElementById("alertPlaceHolder");
                 const wrapper = document.createElement("div");
@@ -52,7 +52,7 @@
     }
 
     function getTags() {
-        axios.get("http://localhost:8081/api/tags?category=" + categoryId).then((response) => {
+        axios.get("http://0.0.0.0/api/tags?category=" + categoryId).then((response) => {
             tags = response.data;
         });
     }

@@ -8,7 +8,7 @@
 
     function deleteIdea() {
         axios
-            .delete("http://localhost:8081/api/ideas/"+deleteIdeaPtr._id, deleteIdeaPtr)
+            .delete("http://0.0.0.0/api/ideas/"+deleteIdeaPtr._id, deleteIdeaPtr)
             .then((response) => {
                 const alertPlaceholder = document.getElementById("alertPlaceHolder");
                 const wrapper = document.createElement("div");

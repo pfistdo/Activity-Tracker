@@ -7,7 +7,7 @@
   let categories = [];
 
   function getCategories() {
-    axios.get("http://localhost:8081/api/categories").then((response) => {
+    axios.get("http://0.0.0.0/api/categories").then((response) => {
       categories = response.data;
     });
   }

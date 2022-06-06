@@ -8,7 +8,7 @@
 
     function deleteCategory() {
         axios
-            .delete("http://localhost:8081/api/categories/"+deleteCat._id, deleteCat)
+            .delete("http://0.0.0.0/api/categories/"+deleteCat._id, deleteCat)
             .then((response) => {
                 const alertPlaceholder = document.getElementById("alertPlaceHolder");
                 const wrapper = document.createElement("div");

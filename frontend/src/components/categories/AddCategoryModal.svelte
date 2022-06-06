@@ -9,7 +9,7 @@
 
     function addCategory() {
         axios
-            .post("http://localhost:8081/api/categories", category)
+            .post("http://0.0.0.0/api/categories", category)
             .then((response) => {
                 const alertPlaceholder = document.getElementById("alertPlaceHolder");
                 const wrapper = document.createElement("div");
