@@ -9,14 +9,14 @@
 	let tags = [];
 
 	function getTags() {
-		axios.get("http://0.0.0.0/api/tags?category=" + categoryId).then((response) => {
+		axios.get("https://idea-tracker-pt.herokuapp.com/api/tags?category=" + categoryId).then((response) => {
 			tags = response.data;
 		});
 	}
 
 	function editTag(tag) {
 		axios
-            .put("http://0.0.0.0/api/tags/"+tag._id, tag)
+            .put("https://idea-tracker-pt.herokuapp.com/api/tags/"+tag._id, tag)
             .then((response) => {
                 const alertPlaceholder = document.getElementById("alertPlaceHolderAddTag");
                 const wrapper = document.createElement("div");
@@ -51,7 +51,7 @@
 
 	function deleteTag(tag) {
 		axios
-            .delete("http://0.0.0.0/api/tags/"+tag._id, tag)
+            .delete("https://idea-tracker-pt.herokuapp.com/api/tags/"+tag._id, tag)
             .then((response) => {
                 const alertPlaceholder = document.getElementById("alertPlaceHolderAddTag");
                 const wrapper = document.createElement("div");

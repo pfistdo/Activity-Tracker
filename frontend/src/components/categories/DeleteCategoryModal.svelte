@@ -8,7 +8,7 @@
 
     function deleteCategory() {
         axios
-            .delete("http://0.0.0.0/api/categories/"+deleteCat._id, deleteCat)
+            .delete("https://idea-tracker-pt.herokuapp.com/api/categories/"+deleteCat._id, deleteCat)
             .then((response) => {
                 const alertPlaceholder = document.getElementById("alertPlaceHolder");
                 const wrapper = document.createElement("div");

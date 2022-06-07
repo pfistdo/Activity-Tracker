@@ -13,7 +13,7 @@
 
     function addIdea() {
         axios
-            .post("http://0.0.0.0/api/ideas", idea)
+            .post("https://idea-tracker-pt.herokuapp.com/api/ideas", idea)
             .then((response) => {
                 const alertPlaceholder = document.getElementById("alertPlaceHolder");
                 const wrapper = document.createElement("div");
@@ -52,7 +52,7 @@
     }
 
     function getTags() {
-        axios.get("http://0.0.0.0/api/tags?category=" + categoryId).then((response) => {
+        axios.get("https://idea-tracker-pt.herokuapp.com/api/tags?category=" + categoryId).then((response) => {
             tags = response.data;
         });
     }

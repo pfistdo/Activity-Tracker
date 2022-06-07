@@ -9,7 +9,7 @@
 
     function addCategory() {
         axios
-            .post("http://0.0.0.0/api/categories", category)
+            .post("https://idea-tracker-pt.herokuapp.com/api/categories", category)
             .then((response) => {
                 const alertPlaceholder = document.getElementById("alertPlaceHolder");
                 const wrapper = document.createElement("div");

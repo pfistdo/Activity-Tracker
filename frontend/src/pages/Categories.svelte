@@ -7,7 +7,7 @@
   let categories = [];
 
   function getCategories() {
-    axios.get("http://0.0.0.0/api/categories").then((response) => {
+    axios.get("https://idea-tracker-pt.herokuapp.com/api/categories").then((response) => {
       categories = response.data;
     });
   }

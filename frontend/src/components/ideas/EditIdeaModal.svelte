@@ -11,7 +11,7 @@
 
     function editIdea() {
         axios
-            .put("http://0.0.0.0/api/ideas/"+editIdeaPtr._id, editIdeaPtr)
+            .put("https://idea-tracker-pt.herokuapp.com/api/ideas/"+editIdeaPtr._id, editIdeaPtr)
             .then((response) => {
                 const alertPlaceholder = document.getElementById("alertPlaceHolder");
                 const wrapper = document.createElement("div");
@@ -45,7 +45,7 @@
     }
 
     function getTags() {
-        axios.get("http://0.0.0.0/api/tags?category=" + editIdeaPtr.category).then((response) => {
+        axios.get("https://idea-tracker-pt.herokuapp.com/api/tags?category=" + editIdeaPtr.category).then((response) => {
             tags = response.data;
         });
     }

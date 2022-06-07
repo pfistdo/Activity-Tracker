@@ -11,7 +11,7 @@
 
     function addTag() {
         axios
-            .post("http://0.0.0.0/api/tags", tag)
+            .post("https://idea-tracker-pt.herokuapp.com/api/tags", tag)
             .then((response) => {
                 const alertPlaceholder = document.getElementById("alertPlaceHolderAddTag");
                 const wrapper = document.createElement("div");

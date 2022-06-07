@@ -15,7 +15,7 @@
   let searchString = ""; //for search bar
 
   function getIdeas() {
-    axios.get("http://0.0.0.0/api/ideas/*?category=" + categoryId).then((response) => {
+    axios.get("https://idea-tracker-pt.herokuapp.com/api/ideas/*?category=" + categoryId).then((response) => {
       originalIdeas = response.data;
       ideas = originalIdeas;
     });

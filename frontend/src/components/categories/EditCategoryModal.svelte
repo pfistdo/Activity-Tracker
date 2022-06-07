@@ -8,7 +8,7 @@
 
     function editCategory() {
         axios
-            .put("http://0.0.0.0/api/categories/"+editCat._id, editCat)
+            .put("https://idea-tracker-pt.herokuapp.com/api/categories/"+editCat._id, editCat)
             .then((response) => {
                 const alertPlaceholder = document.getElementById("alertPlaceHolder");
                 const wrapper = document.createElement("div");
